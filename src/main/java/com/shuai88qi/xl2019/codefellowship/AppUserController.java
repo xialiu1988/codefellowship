@@ -2,6 +2,7 @@ package com.shuai88qi.xl2019.codefellowship;
 
 //import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -18,7 +20,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 
 @Controller
-public class AppUserController {
+public class AppUserController  {
    @Autowired
     AppUserRepository appUserRepository;
 
@@ -31,16 +33,11 @@ public class AppUserController {
     }
 
 
-
-
-
-
     @GetMapping("/signup")
     public String getSignupPage(Model m) {
         m.addAttribute("newuser",new AppUser());
         return "signup";
     }
-
 
 
     @PostMapping("/signup")
@@ -59,10 +56,7 @@ public class AppUserController {
 
     @GetMapping("/users/{id}")
     public String getMyProfile(Principal p, Model m){
-
-
         AppUser currentUser = (AppUser)((UsernamePasswordAuthenticationToken) p).getPrincipal();
-
         m.addAttribute("principal",currentUser);
         return "myprofile";
     }
@@ -74,7 +68,6 @@ public class AppUserController {
 
      //reference from Evan! yeah!
         AppUser currentUser = (AppUser)((UsernamePasswordAuthenticationToken) p).getPrincipal();
-
         m.addAttribute("principal",currentUser);
         return "myprofile";
     }
