@@ -72,7 +72,7 @@ public class AppUserController {
     @GetMapping("/myprofile")
     public String afterLogin(Principal p, Model m){
 
-
+     //reference from Evan! yeah!
         AppUser currentUser = (AppUser)((UsernamePasswordAuthenticationToken) p).getPrincipal();
 
         m.addAttribute("principal",currentUser);
