@@ -3,6 +3,9 @@ package com.shuai88qi.xl2019.codefellowship;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.security.PublicKey;
 import java.sql.Timestamp;
 
@@ -12,7 +15,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-
+    @Size(min=2)
     String body;
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     Timestamp createAt;

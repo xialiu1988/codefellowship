@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>new post</title>
@@ -9,9 +10,19 @@
 
 <div th:replace="fragments/header :: fellows">...</div>
    <h3>Add new Post</h3>
-   <form action="/posts" method="POST">
-       Body: <input type="text" name="body" />
-       <input type="submit" />
-   </form>
+   <!--<form action="/posts" method="POST">-->
+       <!--Body: <textarea type="text" name="body" ></textarea>-->
+       <!--<button type="submit">Submit your Post</button>-->
+   <!--</form>-->
+
+
+<form action="#" th:action="@{/posts}" th:object="${newpost}"  method="post">
+
+     Body:   <textarea type="text" th:field="*{body}"/>
+    <!--can't show the field error msg here-->
+    <p  th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
+
+    <button type="submit">Submit your Post</button>
+</form>
 </body>
 </html>

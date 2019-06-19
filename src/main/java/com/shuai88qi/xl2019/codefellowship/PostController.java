@@ -5,12 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.sql.Timestamp;
 
@@ -23,20 +22,23 @@ public class PostController {
 
 
      @GetMapping("/posts/add")
-    public String getDinosaurCreator() {
+    public String getDinosaurCreator(Model m) {
+         m.addAttribute("newpost",new Post());
         return "createPost";
     }
 
-
+ // trying to show the field error msg but not working. it will not show the error msg on html
     @PostMapping("/posts")
-    public RedirectView addPost(String body, Principal p){
-       Post newpost = new Post();
-       newpost.body=body;
+    public String addPost(@Valid Post newpost, BindingResult bindingResult, Principal p){
+        if (bindingResult.hasErrors()) {
+            System.out.println("BINDING RESULT ERROR");
+            return "redirect:/posts/add";
+        }
        newpost.createAt=new Timestamp(System.currentTimeMillis());
        AppUser user= appUserRepository.findByUsername(p.getName());
        newpost.appUser=user;
        postRepository.save(newpost);
-       return new RedirectView("/myprofile");
+       return "redirect:/myprofile";
     }
 
     @GetMapping("/posts/{id}")

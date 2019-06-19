@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Error</title>
@@ -19,7 +19,10 @@
       <td>Status</td>
       <td th:text="${status}"/>
   </tr>
+    <tr>
+        <td>Message</td>
+        <td th:text="${message}"/>
+    </tr>
 </table>
-<a href="/login">Log In</a>
 </body>
 </html>
