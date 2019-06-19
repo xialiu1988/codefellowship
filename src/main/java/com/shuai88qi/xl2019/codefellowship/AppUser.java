@@ -7,10 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class AppUser implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
@@ -23,6 +23,14 @@ public class AppUser implements UserDetails {
     Date dateofBirth;
     String bio;
 
+
+    @OneToMany(mappedBy = "appUser")
+    List<Post> posts;
+
+    public List<Post> getPosts() {
+        return this.posts;
+    }
+
     public AppUser() {}
 
     public AppUser(String username, String password,String firstName,String lastName,Date date,String bio) {
@@ -34,9 +42,9 @@ public class AppUser implements UserDetails {
         this.bio=bio;
     }
 
-
-
-
+    public long getId(){
+        return this.id;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -5,6 +5,7 @@
     <title>Profile</title>
 </head>
 <body>
+<div th:replace="fragments/header :: fellows">...</div>
        <h1>My Profile</h1>
       <img src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?cs=srgb&dl=beautiful-beauty-blue-414612.jpg&fm=jpg" height="200px" width="200px"/>
       <p>Username: <span th:text="${principal.username}"/></p>
@@ -12,7 +13,13 @@
        <p>Last Name: <span th:text="${principal.lastName}"/></p>
        <p>Date of Birth: <span th:text="${principal.dateofBirth}"/></p>
        <p>Bio: <span th:text="${principal.bio}"/></p>
-<a href="/potato">Log Out</a>
-
+<h4>Your Posts</h4>
+<ul>
+    <li th:each="post : ${principal.posts}">
+        <a th:href="'/posts/'+${post.id}">
+            <span th:text="${post.body}"></span>, create at <span th:text="${post.createAt}"></span>
+        </a>
+    </li>
+</ul>
 </body>
 </html>

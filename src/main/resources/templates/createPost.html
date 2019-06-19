@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>new post</title>
+</head>
+<body>
+
+
+<div th:replace="fragments/header :: fellows">...</div>
+   <h3>Add new Post</h3>
+   <form action="/posts" method="POST">
+       Body: <input type="text" name="body" />
+       <input type="submit" />
+   </form>
+</body>
+</html>
