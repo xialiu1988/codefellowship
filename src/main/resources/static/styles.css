@@ -1,0 +1,90 @@
+
+@import url('https://fonts.googleapis.com/css?family=Allerta+Stencil|Cabin+Sketch&display=swap');
+
+h1{
+   font-family:'Allerta Stencil', sans-serif;
+   font-size:4vw;
+   color: orange;
+   text-align: center;
+   margin-bottom:15px;
+}
+h4{
+      font-family: 'Cabin Sketch', cursive;
+      font-size:2vw;
+      text-align: center;
+      margin-top: 20px;
+}
+
+body{
+   background-color: grey;
+   text-align:center;
+}
+
+
+#myprofile{
+    border: 5px solid blue;
+     margin: 0 auto;
+     width: 400px;
+     }
+
+#posts{
+list-style-type: none;
+text-align:center;
+}
+
+#posts li{
+ background: #cce5ff;
+  margin: 5px;
+  }
+
+
+.nav {
+    text-align: center;
+}
+
+    .nav ul {
+        list-style: none;
+        display: inline-block;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+    }
+
+
+    .nav li {
+        color: #fff;
+        background-color: white;
+        display: block;
+        float: left;
+        padding: 1rem;
+        position: relative;
+        text-decoration: none;
+        transition-duration: 0.5s;
+    }
+.row {
+    width: 150px;
+    margin: 0 auto;
+    clear: both;
+}
+
+    .row input {
+        width: 100%;
+        clear: both;
+    }
+
+    div {
+        text-align: center;
+    }
+
+
+    table {
+        width: 50%;
+        margin-top: auto;
+        margin-left: auto;
+        margin-right: auto;
+        border-collapse: collapse;
+    }
+
+    td, th {
+        border: 5px solid orange;
+    }

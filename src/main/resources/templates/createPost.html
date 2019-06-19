@@ -4,25 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>new post</title>
+    <link href="/reset.css" rel="stylesheet" />
+    <link href="/styles.css" rel="stylesheet" />
 </head>
 <body>
 
 
 <div th:replace="fragments/header :: fellows">...</div>
+<div class="row">
    <h3>Add new Post</h3>
-   <!--<form action="/posts" method="POST">-->
-       <!--Body: <textarea type="text" name="body" ></textarea>-->
-       <!--<button type="submit">Submit your Post</button>-->
-   <!--</form>-->
-
-
 <form action="#" th:action="@{/posts}" th:object="${newpost}"  method="post">
 
-     Body:   <textarea type="text" th:field="*{body}"/>
-    <!--can't show the field error msg here-->
-    <p  th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></p>
-
+    <table>
+        <tr>
+            <td>Body:</td>
+            <td><textarea type="text" th:field="*{body}"  required/></td>
+            <td th:if="${#fields.hasErrors('body')}" th:errors="*{body}">Body Error</td>
+        </tr>
+    </table>
     <button type="submit">Submit your Post</button>
 </form>
+</div>
 </body>
 </html>
