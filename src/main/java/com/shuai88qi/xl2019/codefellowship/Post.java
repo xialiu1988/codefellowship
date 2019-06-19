@@ -15,7 +15,8 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    @Size(min=2)
+    @NotNull
+    @Size(min=2,max=400)
     String body;
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     Timestamp createAt;

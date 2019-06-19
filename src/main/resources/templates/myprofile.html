@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
+    <link href="/reset.css" rel="stylesheet" />
+    <link href="/styles.css" rel="stylesheet" />
 </head>
 <body>
 <div th:replace="fragments/header :: fellows">...</div>
        <h1>My Profile</h1>
-      <img src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?cs=srgb&dl=beautiful-beauty-blue-414612.jpg&fm=jpg" height="200px" width="200px"/>
+<div id ="myprofile">
+      <img src="/cat.jpg" height="200px" width="200px"/>
       <p>Username: <span th:text="${principal.username}"/></p>
        <p>First Name: <span th:text="${principal.firstName}"/></p>
        <p>Last Name: <span th:text="${principal.lastName}"/></p>
        <p>Date of Birth: <span th:text="${principal.dateofBirth}"/></p>
        <p>Bio: <span th:text="${principal.bio}"/></p>
+</div>
 <h4>Your Posts</h4>
-<ul>
+<ul id="posts">
     <li th:each="post : ${principal.posts}">
         <a th:href="'/posts/'+${post.id}">
             <span th:text="${post.body}"></span>

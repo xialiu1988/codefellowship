@@ -29,10 +29,11 @@ public class PostController {
 
  // trying to show the field error msg but not working. it will not show the error msg on html
     @PostMapping("/posts")
-    public String addPost(@Valid Post newpost, BindingResult bindingResult, Principal p){
+    public String addPost(@Valid Post newpost, BindingResult bindingResult, Principal p,Model m){
         if (bindingResult.hasErrors()) {
             System.out.println("BINDING RESULT ERROR");
-            return "redirect:/posts/add";
+            m.addAttribute("newpost",new Post());
+            return "createPost";
         }
        newpost.createAt=new Timestamp(System.currentTimeMillis());
        AppUser user= appUserRepository.findByUsername(p.getName());
@@ -54,8 +55,6 @@ public class PostController {
 
 
     }
-
-
 
     // came from https://stackoverflow.com/questions/2066946/trigger-404-in-spring-mvc-controller
     @ResponseStatus(value = HttpStatus.FORBIDDEN)
