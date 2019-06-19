@@ -44,13 +44,11 @@ public class PostController {
     @GetMapping("/posts/{id}")
     public String showPost(@PathVariable long id, Model m, Principal p) {
        Post post = postRepository.findById(id).get();
-        // check if that dinosaur belongs to the currently logged in user
+        // check if that post belongs to the currently logged in user
         if (post.getAppUser().username.equals(p.getName())) {
-            // if so, do the nice things
             m.addAttribute("onepost", post);
             return "post";
         } else {
-            // otherwise, tell them no
             throw new NotyourPostsException("Please create your own posts.");
         }
 
