@@ -22,7 +22,7 @@ public class PostController {
 
 
      @GetMapping("/posts/add")
-    public String getDinosaurCreator(Model m) {
+    public String getCreatePost(Model m) {
          m.addAttribute("newpost",new Post());
         return "createPost";
     }
@@ -42,7 +42,7 @@ public class PostController {
     }
 
     @GetMapping("/posts/{id}")
-    public String showDinosaur(@PathVariable long id, Model m, Principal p) {
+    public String showPost(@PathVariable long id, Model m, Principal p) {
        Post post = postRepository.findById(id).get();
         // check if that dinosaur belongs to the currently logged in user
         if (post.getAppUser().username.equals(p.getName())) {
