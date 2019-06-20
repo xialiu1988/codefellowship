@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>public profile</title>
+    <link href="/reset.css" rel="stylesheet" />
+    <link href="/styles.css" rel="stylesheet" />
+</head>
+<body>
+
+     <h1>Profile</h1>
+     <a href="/myprofile">My Profile</a>
+     <form th:action="'/explore/'+${theUser.id}" method="post">
+         <th:block th:switch="${request}">
+             <th:block th:case="false">
+                 <button type="submit">Follow Me</button>
+             </th:block>
+             <th:block th:case="true">
+                <p>Following</p>
+             </th:block>
+         </th:block>
+     </form>
+     <div id ="myprofile">
+         <img src="/cat.jpg" height="200px" width="200px"/>
+         <p>Username: <span th:text="${theUser.username}"/></p>
+         <p>First Name: <span th:text="${theUser.firstName}"/></p>
+         <p>Last Name: <span th:text="${theUser.lastName}"/></p>
+         <p>Date of Birth: <span th:text="${theUser.dateofBirth}"/></p>
+         <p>Bio: <span th:text="${theUser.bio}"/></p>
+     </div>
+     <h4>Recent Posts</h4>
+     <ul id="posts">
+         <li th:each="post : ${theUser.posts}">
+             <a th:href="'/posts/'+${post.id}">
+                 <span th:text="${post.body}"></span>
+                 create at <span th:text="${post.createAt}"></span>
+             </a>
+         </li>
+     </ul>
+
+</body>
+</html>
