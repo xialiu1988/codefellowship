@@ -102,10 +102,18 @@ public class AppUserController  {
 
 
     @GetMapping("/explore/{id}")
-    public String getTheUserPage(@PathVariable Long id,Model m){
+    public String getTheUserPage(@PathVariable Long id,Model m,Principal p){
         AppUser theUser = appUserRepository.findById(id).get();
-        m.addAttribute("theUser",theUser);
-        m.addAttribute("request",false);
+        //current logged in user
+        AppUser currUser = appUserRepository.findByUsername(p.getName());
+        if(currUser.followingUsers.contains(theUser)){
+            m.addAttribute("theUser", theUser);
+            m.addAttribute("request",true);
+        }
+        else {
+            m.addAttribute("theUser", theUser);
+            m.addAttribute("request", false);
+        }
         return "publicProfile";
     }
 
@@ -115,13 +123,21 @@ public class AppUserController  {
         //get the user i want to follow
       AppUser theUser = appUserRepository.findById(id).get();
       //current logged in user
-      AppUser currUser = appUserRepository.findByUsername(p.getName());
+           AppUser currUser = appUserRepository.findByUsername(p.getName());
+      if(currUser.followingUsers.contains(theUser)){
+          currUser.followingUsers.remove(theUser);
+          appUserRepository.save(currUser);
+          m.addAttribute("theUser", theUser);
+          m.addAttribute("request",false);
+      }
 
-      //add theUser to the following list
-      currUser.followingUsers.add(theUser);
-      appUserRepository.save(currUser);
-      m.addAttribute("theUser",theUser);
-      m.addAttribute("request",true);
+      else {
+          //add theUser to the following list
+          currUser.followingUsers.add(theUser);
+          appUserRepository.save(currUser);
+          m.addAttribute("theUser", theUser);
+          m.addAttribute("request", true);
+      }
       return "publicProfile";
 
   }

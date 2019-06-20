@@ -17,8 +17,11 @@
    <div th:if="${following.size()>0}">
        <h2>You are following these users</h2>
        <ul>
+
            <li th:each="p:${following}">
-               <p th:text="${p.firstName}+ ' '+ ${p.lastName}"></p>
+               <a th:href="'/explore/'+${p.id}">
+                   <p th:text="${p.firstName}+ ' '+ ${p.lastName}"></p>
+               </a>
                <p th:text="${p.dateofBirth}"></p>
                <p th:text="${p.bio}"></p>
 
@@ -28,7 +31,6 @@
                       Created At: <span th:text="${l.createAt}"></span>
                   </li>
               </ul>
-
 
 
            </li>
